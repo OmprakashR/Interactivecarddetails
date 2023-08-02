@@ -951,7 +951,9 @@ button {
   --tw-border-opacity: 1;
   border-color: rgb(100 116 139 / var(--tw-border-opacity));
 }
-
+.opacity-0{
+  	opacity: 0;
+}
 @media (min-width: 768px) {
   .md\:col-span-6 {
     grid-column: span 6 / span 6;
