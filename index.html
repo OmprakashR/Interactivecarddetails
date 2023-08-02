@@ -72,7 +72,7 @@
                         <div class="mt-2">
                             <div class="">
                                 <label class="tracking-wider uppercase text-xs font-bold"> Card Number</label>
-                                <input onkeyup="checkcardval(CardNumber)" placeholder="e.g. 1234 5678 9123 0000"
+                                <input  pattern="[0-9]*" inputmode="numeric" onkeyup="checkcardval(CardNumber)" placeholder="e.g. 1234 5678 9123 0000"
                                     type="text" id="CardNumber" name="CardNumber"
                                     class="text-xs mt-2 w-full border-2 border-slate-400 p-2 rounded focus:border-slate-500 outline-none remove-arrow"
                                     maxlength="18" />
@@ -84,11 +84,11 @@
                                 <div class="">
                                     <label class="tracking-wider uppercase text-xs font-bold"> Exp. Date (MM/YY)</label>
                                     <div class="flex gap-2">
-                                        <input onkeyup="validateExpDate(event)" name="MM" placeholder="MM" type="text"
+                                        <input  pattern="[0-9]*" inputmode="numeric" onkeyup="validateExpDate(event)" name="MM" placeholder="MM" type="text"
                                             id="MM"
                                             class="text-xs mt-2 border-2 border-slate-400 p-2 rounded w-[70px] focus:border-slate-500 outline-none remove-arrow"
                                             maxlength="2" />
-                                        <input onkeyup="validateExpDate(event)" name="YY" placeholder="YY" type="text"
+                                        <input  pattern="[0-9]*" inputmode="numeric" onkeyup="validateExpDate(event)" name="YY" placeholder="YY" type="text"
                                             id="YY"
                                             class="text-xs mt-2 border-2 border-slate-400 p-2 rounded w-[70px] focus:border-slate-500 outline-none remove-arrow"
                                             maxlength="2" />
@@ -99,7 +99,7 @@
 
                                 <div>
                                     <label class="tracking-wider uppercase text-xs font-bold"> CVC</label>
-                                    <input onkeyup="validateCVC(cvc)" name="cvc" placeholder="e.g. 123" type="text"
+                                    <input  pattern="[0-9]*" inputmode="numeric" onkeyup="validateCVC(cvc)" name="cvc" placeholder="e.g. 123" type="text"
                                         id="cvc"
                                         class="text-xs mt-2 w-full border-2 border-slate-400 p-2 rounded focus:border-slate-500 outline-none remove-arrow"
                                         maxlength="3" />
