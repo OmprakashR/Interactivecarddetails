@@ -108,6 +108,7 @@ function ContinueBack() {
     cvc.value = null;
     document.getElementById("fillCard").classList.remove("hidden");
     document.getElementById("ShowSubmit").classList.add("hidden");
+    confirmbtn.classList.add("notallowed");
 
 }
 
