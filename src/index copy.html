@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- displays site properly based on user's device -->
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+    <title>Frontend Mentor | Interactive card details form</title>
+    <link href="../dist/output.css" rel="stylesheet">
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+
+</head>
+
+<body class="grid min-h-screen bg-no-repeat place-content-center bg-fixed	">
+
+    <div class="container mx-auto">
+        <div class="min-w-[1000px]">
+            <div class=" grid grid-cols-12 grid-rows-6 ">
+
+
+                <div class="col-span-6 row-span-6  ">
+
+                    <div class="  grid grid-cols-6 grid-rows-6 gap-6  ">
+
+                        <div class="col-start-1 col-end-6 row-start-1
+                             row-end-4 card-front bg-contain bg-no-repeat h-[247px] w-full">
+
+
+
+                            <div class="  grid grid-cols-6 grid-rows-6 gap-4  h-full  ">
+
+                                <div
+                                    class="col-start-1 col-end-7 gap-1 row-start-1 row-end-4 p-2 flex flex-row items-center ps-4 pe-4">
+                                    <div class="w-[40px] h-[40px] bg-white block rounded-full "> </div>
+                                    <div class="w-[30px] h-[30px] border-2 border-white block rounded-full "></div>
+                                </div>
+
+
+                                <div class="col-start-1 col-end-7 row-start-4 row-end-8 p-2 ">
+                                    <div class="text-center 	">
+                                        <span class="text-3xl text-white tracking-widest" id="cardValue">0000 0000 0000
+                                            0000</span>
+                                    </div>
+                                    <div class="flex text-xs tracking-widest justify-between text-white ps-4 pe-4 mt-2">
+                                        <span class="uppercase">Jane Appleseed</span><span>00/00</span>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="col-start-2  col-end-8 row-start-4 row-end-7  bg-contain
+                          relative
+                              bg-no-repeat card-back h-[247px]  w-full">
+                            <div class="absolute right-[85px] text-white top-[110px]">
+
+                                000
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+                </div>
+                <div class="col-span-6  row-span-6 ">
+                    <div class="w-[70%] flex justify-center flex-col h-full mx-auto">
+
+
+                        <div class="mb-2">
+
+                            <div class="">
+                                <label class="tracking-wider uppercase text-xs  font-bold"> Cardholder Name
+
+                                </label>
+                                <input placeholder="  e.g. Jane Appleseed" type="text" id="cardholder"
+                                    class=" text-xs mt-2   w-full border-2 border-slate-400 p-2 rounded focus:border-slate-500 outline-none" />
+
+                            </div>
+
+                        </div>
+
+                        <div class="mt-2">
+
+                            <div class="">
+                                <label class="tracking-wider uppercase text-xs  font-bold"> Card Number
+
+                                </label>
+                                <input onkeyup="checkcardval(CardNumber)" placeholder="e.g. 1234 5678 9123 0000"
+                                    type="text" id="CardNumber" name="CardNumber"
+                                    class=" text-xs mt-2    w-full border-2 border-slate-400 p-2 rounded focus:border-slate-500 outline-none remove-arrow "
+                                    maxlength="16" />
+                                <p class="text-xs erroetext font-bold mt-1 hidden" id="Wrong_format"> Wrong format,
+                                    number only</p>
+                            </div>
+
+
+
+
+                            <div class="flex gap-5 mt-3 justify-starts">
+                                <div class="">
+                                    <label class="tracking-wider uppercase text-xs  font-bold"> Exp. Date (MM/YY)
+
+                                    </label>
+                                    <div class="flex   gap-2">
+                                        <input placeholder="MM" type="text" id="MM"
+                                            class=" text-xs mt-2  border-2 border-slate-400 p-2 rounded w-[70px] focus:border-slate-500 outline-none remove-arrow"
+                                            maxlength="2" />
+                                        <input placeholder="YY" type="text" id="YY"
+                                            class=" text-xs mt-2  border-2 border-slate-400 p-2 rounded w-[70px] focus:border-slate-500 outline-none remove-arrow"
+                                            maxlength="2" />
+
+                                    </div>
+                                    <p class="text-xs erroetext font-bold  mt-1 hidden"> Can't be blank</p>
+                                </div>
+
+                                <div>
+                                    <label class="tracking-wider uppercase text-xs  font-bold"> CVC
+
+                                    </label>
+                                    <input placeholder="  e.g. 123" type="text" id="CVC"
+                                        class=" text-xs mt-2    border-2 border-slate-400 p-2 rounded focus:border-slate-500 outline-none remove-arrow"
+                                        maxlength="3" />
+                                    <p class="text-xs erroetext font-bold  mt-1 hidden"> Can't be blank</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="">
+                            <button class=" w-full p-2 text-white rounded mt-4">
+                                Confirm</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+
+ 
+
+
+    <script>
+
+
+        function checkcardval(CardNumber) {
+            var regex = /^[0-9]+$/;
+           let valInner = document.getElementById("cardValue");
+            if (!regex.test(CardNumber.value)) {
+                document.getElementById("Wrong_format").style.display = "block";
+              
+                CardNumber.value = CardNumber.value.replace(/\s/g, '');
+                
+            } else {
+                document.getElementById("Wrong_format").style.display = "none";
+                console.log(CardNumber.value);
+                valInner.innerHTML= CardNumber.value;
+                
+            }
+            checknull();
+        }
+
+        function checknull() {
+            var CardNumber = document.getElementById("CardNumber").value;
+            if (!CardNumber) {
+                valInner.innerHTML= "0000 0000 0000 0000";
+                document.getElementById("Wrong_format").style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <title>Frontend Mentor | Interactive card details form</title>
+    <link href="../dist/output.css" rel="stylesheet">
+</head>
+
+<body class="grid min-h-screen bg-no-repeat place-content-center bg-fixed">
+
+    <div class="container mx-auto">
+        <div class="min-w-[1000px]">
+            <div class="grid grid-cols-12 grid-rows-6">
+
+                <div class="col-span-6 row-span-6">
+
+                    <div class="grid grid-cols-6 grid-rows-6 gap-6">
+
+                        <div
+                            class="col-start-1 col-end-6 row-start-1 row-end-4 card-front bg-contain bg-no-repeat h-[247px] w-full">
+
+                            <div class="grid grid-cols-6 grid-rows-6 gap-4 h-full">
+
+                                <div
+                                    class="col-start-1 col-end-7 gap-1 row-start-1 row-end-4 p-2 flex flex-row items-center ps-4 pe-4">
+                                    <div class="w-[40px] h-[40px] bg-white block rounded-full"></div>
+                                    <div class="w-[30px] h-[30px] border-2 border-white block rounded-full"></div>
+                                </div>
+
+                                <div class="col-start-1 col-end-7 row-start-4 row-end-8 p-2">
+                                    <div class="text-center">
+                                        <span class="text-3xl text-white tracking-widest" id="cardValue">0000 0000 0000
+                                            0000</span>
+                                    </div>
+                                    <div class="flex text-xs tracking-widest justify-between text-white ps-4 pe-4 mt-2">
+                                        <span class="uppercase" id="cardholderFull">Jane Appleseed</span><span><span
+                                                id="mmValue">00</span> / <span id="yyValue">00</span> </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="col-start-2 col-end-8 row-start-4 row-end-7 bg-contain relative bg-no-repeat card-back h-[247px] w-full">
+                            <div class="absolute right-[55px] text-white top-[105px]" id="cvcValue">
+                                000
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-span-6 row-span-6">
+                    <div class="w-[70%] flex justify-center flex-col h-full mx-auto">
+
+                        <div class="mb-2">
+                            <div class="">
+                                <label class="tracking-wider uppercase text-xs font-bold"> Cardholder
+                                    Name</label>
+                                <input onkeyup="cardHodername(cardholder)" placeholder="e.g. Jane Appleseed" type="text"
+                                    id="cardholder" name="cardholder"
+                                    class="text-xs mt-2 w-full border-2 border-slate-400 p-2 rounded focus:border-slate-500 outline-none" />
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <div class="">
+                                <label class="tracking-wider uppercase text-xs font-bold"> Card Number</label>
+                                <input onkeyup="checkcardval(CardNumber)" placeholder="e.g. 1234 5678 9123 0000"
+                                    type="text" id="CardNumber" name="CardNumber"
+                                    class="text-xs mt-2 w-full border-2 border-slate-400 p-2 rounded focus:border-slate-500 outline-none remove-arrow"
+                                    maxlength="19" />
+                                <p class="text-xs erroetext font-bold mt-1 hidden" id="Wrong_format">Wrong format,
+                                    number only</p>
+                            </div>
+
+                            <div class="flex gap-5 mt-3 justify-starts">
+                                <div class="">
+                                    <label class="tracking-wider uppercase text-xs font-bold"> Exp. Date (MM/YY)</label>
+                                    <div class="flex gap-2">
+                                        <input onkeyup="validateExpDate(event)" name="MM" placeholder="MM" type="text"
+                                            id="MM"
+                                            class="text-xs mt-2 border-2 border-slate-400 p-2 rounded w-[70px] focus:border-slate-500 outline-none remove-arrow"
+                                            maxlength="2" />
+                                        <input onkeyup="validateExpDate(event)" name="YY" placeholder="YY" type="text"
+                                            id="YY"
+                                            class="text-xs mt-2 border-2 border-slate-400 p-2 rounded w-[70px] focus:border-slate-500 outline-none remove-arrow"
+                                            maxlength="2" />
+                                    </div>
+                                    <p class="text-xs erroetext font-bold mt-1 hidden" id="Wrong_exp_date">Can't be
+                                        blank</p>
+                                </div>
+
+                                <div>
+                                    <label class="tracking-wider uppercase text-xs font-bold"> CVC</label>
+                                    <input onkeyup="validateCVC(cvc)" name="cvc" placeholder="e.g. 123" type="text"
+                                        id="cvc"
+                                        class="text-xs mt-2 w-full border-2 border-slate-400 p-2 rounded focus:border-slate-500 outline-none remove-arrow"
+                                        maxlength="3" />
+                                    <p class="text-xs erroetext font-bold mt-1 hidden" id="Wrong_cvc">Can't be blank</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button class="w-full p-2 text-white rounded mt-4  notallowed"
+                                id="confirmbtn" onclick="checkEmptyInputs(confirmbtn)">Confirm</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+
+
+        var regex = /^[0-9 ]+$/;
+        const confirmbtnsubmit = document.getElementById("confirmbtn");
+
+        function cardHodername(cardholder) {
+            let cardHoldername = document.getElementById("cardholderFull");
+            let cardholderValue = document.getElementById("cardholder");
+        
+            cardHoldername.innerHTML = cardholderValue.value;
+            checkEmptyInputs(); // Check for empty inputs
+        }
+
+        function checkcardval() {
+            let CardNumber = document.getElementById("CardNumber");
+
+            let valInner = document.getElementById("cardValue");
+            if (!regex.test(CardNumber.value)) {
+                document.getElementById("Wrong_format").style.display = "block";
+                CardNumber.value = CardNumber.value.replace(/\s/g, '');
+            } else {
+                document.getElementById("Wrong_format").style.display = "none";
+                // Add letter-spacing after every 4 digits
+                let formattedCardNumber = CardNumber.value.replace(/\s/g, '').replace(/(.{4})/g, '$1 ');
+                document.getElementById("CardNumber").value = formattedCardNumber;
+
+                valInner.innerHTML = formattedCardNumber;
+            }
+
+            checkEmptyInputs(); // Check for empty inputs
+
+        }
+
+        function validateExpDate() {
+            let MM = document.getElementById("MM");
+            let YY = document.getElementById("YY");
+            let mmInner = document.getElementById("mmValue");
+            let yyInner = document.getElementById("yyValue");
+
+            // Validate MM (Month)
+            let mmValue = parseInt(MM.value, 10);
+            if (isNaN(mmValue) || mmValue < 1 || mmValue > 12) {
+                document.getElementById("Wrong_exp_date").style.display = "block";
+                MM.value = ''; // Reset MM value
+            } else {
+                document.getElementById("Wrong_exp_date").style.display = "none";
+                mmInner.innerHTML = MM.value;
+                yyInner.innerHTML = YY.value;
+            }
+            checkEmptyInputs(); // Check for empty inputs
+
+        }
+
+        function validateCVC() {
+            let cvc = document.getElementById("cvc");
+            let cvcInner = document.getElementById("cvcValue");
+            if (!regex.test(cvc.value)) {
+                document.getElementById("Wrong_cvc").style.display = "block";
+                cvc.value = cvc.value.replace(/[^0-9]/g, '');
+            } else {
+                document.getElementById("Wrong_cvc").style.display = "none";
+                cvcInner.innerHTML = cvc.value;
+            }
+            checkEmptyInputs(); // Check for empty inputs
+        }
+
+        function submitConfirm(){
+            alert();
+        }
+
+
+
+        function checkEmptyInputs() {
+        let cardholderValue = document.getElementById("cardholder").value;
+        let CardNumber = document.getElementById("CardNumber").value.trim();
+        let MM = document.getElementById("MM").value.trim();
+        let YY = document.getElementById("YY").value.trim();
+        let cvc = document.getElementById("cvc").value.trim();
+        let confirmbtn = document.getElementById("confirmbtn");
+        
+        // Check if all inputs are non-empty and valid
+        if (cardholderValue !== '' && CardNumber !== '' && MM !== '' && YY !== '' && cvc !== '' && regex.test(CardNumber) && regex.test(MM) && regex.test(YY) && regex.test(cvc)) {
+            confirmbtn.classList.remove ("notallowed"); // Show the "Confirm" button
+        } else {
+            confirmbtn.classList.add ("notallowed"); // Hide the "Confirm" button
+        }
+
+
+
+
+
+
+
+    }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+    --White: hsl(0, 0%, 100%);
+    --Light-grayish-violet: hsl(270, 3%, 87%);
+    --Dark-grayish-violet: hsl(279, 6%, 55%);
+    --Very-dark-violet: hsl(278, 68%, 11%);
+}
+
+@font-face {
+    font-family: Space_Grotesk;
+    src: url(../src/SpaceGrotesk-VariableFont_wght.ttf);
+}
+
+body {
+    font-family: Space_Grotesk;
+    background-image: url(/images/bg-main-desktop.png);
+}
+
+.card-front {
+
+    background-image: url(/images/bg-card-front.png);
+}
+
+.card-back {
+    background-image: url(/images/bg-card-back.png);
+}
+
+
+.remove-arrow::-webkit-inner-spin-button,
+.remove-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.remove-arrow {
+    -moz-appearance: textfield;
+}
+
+.erroeborder {
+
+    border: hsl(0, 100%, 66%);
+}
+
+.erroetext {
+
+    color: hsl(0, 100%, 66%);
+}
+
+button {
+    background-color: var(--Very-dark-violet);
+}
+
+.notallowed {
+    @apply opacity-60;
+    @apply pointer-events-none;
+}
+
+
+@media (max-width: 768px) {
+    body {
+        background-image: url(/images/bg-main-mobile.png);
+    }
+}
